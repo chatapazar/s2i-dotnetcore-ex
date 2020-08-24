@@ -28,9 +28,7 @@ namespace app
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //services.AddControllersWithViews();
-            //services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
-            services.AddRazorPages();
+            services.AddControllers();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
@@ -49,35 +47,27 @@ namespace app
             {
                 app.UseDeveloperExceptionPage();
             }
-            else
-            {
-                app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
-            }
+
             app.UseHttpsRedirection();
-            //app.UseStaticFiles();
 
             app.UseRouting();
 
-            //app.UseAuthorization();
-          
-            app.UseSwagger();
+            app.UseAuthorization();
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+            });
+            
             app.UseCors(options => options.AllowAnyOrigin());  
+            app.UseSwagger();
+            
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
             });
           
-            //app.UseMvc();
-          
-            app.UseEndpoints(endpoints =>
-            {
-              endpoints.MapRazorPages();
-              //    endpoints.MapControllerRoute(
-            //        name: "default",
-            //        pattern: "{controller=Home}/{action=Index}/{id?}");
-            });
+
         }
     }
 }
