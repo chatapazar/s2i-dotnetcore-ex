@@ -7,7 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-namespace TodoApi
+namespace app
 {
     public class Program
     {
@@ -15,13 +15,14 @@ namespace TodoApi
         {
             CreateHostBuilder(args).Build().Run();
         }
-
+      
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
-                    //webBuilder.UseStartup<StartupJavaScript>();
+    
                 });
+  
     }
 }
