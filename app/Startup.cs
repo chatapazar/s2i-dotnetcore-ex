@@ -29,7 +29,8 @@ namespace app
         public void ConfigureServices(IServiceCollection services)
         {
             //services.AddControllersWithViews();
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
+            //services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
+            services.AddRazorPages();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
@@ -57,7 +58,7 @@ namespace app
             app.UseHttpsRedirection();
             //app.UseStaticFiles();
 
-            //app.UseRouting();
+            app.UseRouting();
 
             //app.UseAuthorization();
           
@@ -68,14 +69,15 @@ namespace app
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
             });
           
-            app.UseMvc();
+            //app.UseMvc();
           
-            //app.UseEndpoints(endpoints =>
-            //{
-            //    endpoints.MapControllerRoute(
+            app.UseEndpoints(endpoints =>
+            {
+              endpoints.MapRazorPages();
+              //    endpoints.MapControllerRoute(
             //        name: "default",
             //        pattern: "{controller=Home}/{action=Index}/{id?}");
-            //});
+            });
         }
     }
 }
