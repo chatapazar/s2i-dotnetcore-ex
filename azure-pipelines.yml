@@ -41,3 +41,8 @@ steps:
     arguments: '--configuration $(buildConfiguration) --no-restore'
     modifyOutputPath: false
 
+- task: oc-setup@2
+  inputs:
+    connectionType: 'OpenShift Connection Service'
+    openshiftService: 'ocp45'
+    version: '4.4'
